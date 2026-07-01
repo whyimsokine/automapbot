@@ -173,3 +173,27 @@ function showSettings() {
         buttons: [{ type: 'ok' }]
     });
 }
+
+// ===== НИЖНЕЕ МЕНЮ =====
+function setActiveNav(activeIndex) {
+    const items = document.querySelectorAll('.nav-item');
+    items.forEach((item, index) => {
+        item.classList.toggle('active', index === activeIndex);
+    });
+}
+
+// Обновляем при открытии главного экрана
+const originalShowScreen = showScreen;
+showScreen = function(screenId) {
+    originalShowScreen(screenId);
+    if (screenId === 'main-screen') {
+        setActiveNav(0);
+    }
+};
+
+// При открытии карты через меню
+const originalOpenMap = openMap;
+openMap = function() {
+    originalOpenMap();
+    setActiveNav(1);
+};
