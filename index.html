@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ВАШ_КЛЮЧ&lang=ru_RU"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <h1>🚗 АвтоПомощник</h1>
+        </div>
+        <div class="menu-grid">
+            <div class="card" onclick="openMap()">📍 Штрафстоянки</div>
+            <div class="card" onclick="showInstruction()">📋 Инструкция</div>
+            <div class="card" onclick="emergencyCall()">📞 Экстренный вызов</div>
+            <div class="card" onclick="startParkingReminder()">⏰ Напомнить парковку</div>
+        </div>
+    </div>
+
+    <div id="map-view" style="display:none;">
+        <div class="header">
+            <button onclick="backToMenu()">← Назад</button>
+            <span>Штрафстоянки</span>
+        </div>
+        <div id="map" style="height:90vh;"></div>
+    </div>
+
+    <div id="instruction-view" style="display:none; padding:20px;">
+        <button onclick="backToMenu()">← Назад</button>
+        <h2>Что делать при эвакуации:</h2>
+        <p>1. Звони в ГАИ 102</p>
+        <p>2. Возьми документы</p>
+        <p>3. Поезжай на стоянку</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
