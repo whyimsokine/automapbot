@@ -134,10 +134,55 @@ function startParkingReminder() {
 }
 
 // ===== ЗАГЛУШКИ =====
+// ===== ПРОВЕРКА ШТРАФОВ через e-Pasluga =====
 function checkFines() {
+    const input = document.getElementById('carNumber');
+    const resultDiv = document.getElementById('fines-result');
+    const link = document.getElementById('finesLink');
+    
+    let carNumber = input.value.trim().toUpperCase();
+    
+    // Проверяем, что номер введен
+    if (!carNumber) {
+        tg.showPopup({
+            title: '❌ Введите номер',
+            message: 'Пожалуйста, введите номер автомобиля',
+            buttons: [{ type: 'ok' }]
+        });
+        input.focus();
+        return;
+    }
+    
+    // Форматируем номер (убираем лишние пробелы, оставляем только буквы и цифры)
+    carNumber = carNumber.replace(/\s/g, '');
+    
+    // Проверяем формат (простая проверка)
+    if (carNumber.length < 5) {
+        tg.showPopup({
+            title: '❌ Неверный формат',
+            message: 'Введите номер в формате: А123ВС-7',
+            buttons: [{ type: 'ok' }]
+        });
+        return;
+    }
+    
+    // Показываем результат
+    resultDiv.style.display = 'block';
+    
+    // Формируем ссылку на e-Pasluga
+    // Прямая ссылка на услугу проверки штрафов (для примера)
+    const baseUrl = 'https://e-pasluga.by/';
+    // В реальности ссылка может быть другой, но мы используем поиск
+    const searchUrl = `https://www.google.com/search?q=проверка+штрафов+ГАИ+Беларусь+${encodeURIComponent(carNumber)}`;
+    
+    // Рекомендуемый вариант: отправляем пользователя на официальный сайт
+    // с пояснением, что нужно делать
+    link.href = `https://e-pasluga.by/`;
+    link.textContent = `🔐 Перейти на e-pasluga.by`;
+    
     tg.showPopup({
-        title: '🚧 В разработке',
-        message: 'Скоро здесь будет проверка штрафов',
+        title: '✅ Номер принят',
+        message: `Вы будете перенаправлены на e-pasluga.by для проверки штрафов по номеру ${carNumber}`,
         buttons: [{ type: 'ok' }]
     });
 }

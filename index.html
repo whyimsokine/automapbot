@@ -12,6 +12,26 @@
 <body>
     <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
     <div id="main-screen" class="screen active">
+            <!-- Форма для проверки штрафов -->
+        <div class="fines-form">
+            <div class="form-card">
+                <div class="form-title">💰 Проверка штрафов</div>
+                <div class="form-subtitle">Введите номер автомобиля</div>
+                <div class="input-group">
+                    <input type="text" id="carNumber" placeholder="Например: А123ВС-7" class="car-input" maxlength="9">
+                    <button onclick="checkFines()" class="check-btn">Проверить</button>
+                </div>
+                <div class="form-hint">
+                    🔐 Вы будете перенаправлены на официальный портал <b>e-pasluga.by</b>
+                </div>
+                <div id="fines-result" style="display:none;" class="result-box">
+                    <p>📋 Нажмите кнопку ниже, чтобы перейти к результатам:</p>
+                    <a id="finesLink" href="#" target="_blank" class="e-pasluga-btn">🔐 Перейти на e-pasluga.by</a>
+                </div>
+            </div>
+        </div>
+        
+        
         <div class="header">
             <div class="header-title">
                 <span class="car-icon">🚗</span>
