@@ -1,39 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>АвтоПомощник</title>
+    
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=ВАШ_КЛЮЧ&lang=ru_RU"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=Be9f69245-986e-4ee5-96c1-e34baf8b9b78&lang=ru_RU"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app">
+    <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+    <div id="main-screen" class="screen active">
         <div class="header">
-            <h1>🚗 АвтоПомощник</h1>
+            <div class="header-title">
+                <span class="car-icon">🚗</span>
+                <h1>АвтоПомощник</h1>
+            </div>
+            <button class="close-btn" onclick="closeApp()">✕</button>
         </div>
+        
+        <div class="greeting">
+            <p class="greeting-text">👋 Привет! Чем могу помочь?</p>
+        </div>
+        
         <div class="menu-grid">
-            <div class="card" onclick="openMap()">📍 Штрафстоянки</div>
-            <div class="card" onclick="showInstruction()">📋 Инструкция</div>
-            <div class="card" onclick="emergencyCall()">📞 Экстренный вызов</div>
-            <div class="card" onclick="startParkingReminder()">⏰ Напомнить парковку</div>
+            <div class="menu-card" onclick="openMap()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="card-icon">📍</div>
+                <div class="card-title">Штрафстоянки</div>
+                <div class="card-desc">Все стоянки на карте</div>
+            </div>
+            
+            <div class="menu-card" onclick="showInstruction()" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <div class="card-icon">📋</div>
+                <div class="card-title">Инструкция</div>
+                <div class="card-desc">Что делать при эвакуации</div>
+            </div>
+            
+            <div class="menu-card" onclick="emergencyCall()" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                <div class="card-icon">🚨</div>
+                <div class="card-title">Экстренный вызов</div>
+                <div class="card-desc">ГАИ 102</div>
+            </div>
+            
+            <div class="menu-card" onclick="startParkingReminder()" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <div class="card-icon">⏰</div>
+                <div class="card-title">Напомнить</div>
+                <div class="card-desc">Оплатить парковку</div>
+            </div>
+            
+            <div class="menu-card" onclick="checkFines()" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <div class="card-icon">💰</div>
+                <div class="card-title">Штрафы</div>
+                <div class="card-desc">Проверить штрафы</div>
+            </div>
+            
+            <div class="menu-card" onclick="showSettings()" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                <div class="card-icon">⚙️</div>
+                <div class="card-title">Настройки</div>
+                <div class="card-desc">Подписка и данные</div>
+            </div>
+        </div>
+        
+        <div class="footer-banner">
+            <span>🔧 Реклама СТО и эвакуаторов</span>
         </div>
     </div>
 
-    <div id="map-view" style="display:none;">
-        <div class="header">
-            <button onclick="backToMenu()">← Назад</button>
-            <span>Штрафстоянки</span>
+    <!-- ===== ЭКРАН КАРТЫ ===== -->
+    <div id="map-screen" class="screen">
+        <div class="screen-header">
+            <button class="back-btn" onclick="backToMain()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <span class="screen-title">Штрафстоянки</span>
+            <div style="width:40px;"></div>
         </div>
-        <div id="map" style="height:90vh;"></div>
+        <div id="map-container"></div>
     </div>
 
-    <div id="instruction-view" style="display:none; padding:20px;">
-        <button onclick="backToMenu()">← Назад</button>
-        <h2>Что делать при эвакуации:</h2>
-        <p>1. Звони в ГАИ 102</p>
-        <p>2. Возьми документы</p>
-        <p>3. Поезжай на стоянку</p>
+    <!-- ===== ЭКРАН ИНСТРУКЦИИ ===== -->
+    <div id="instruction-screen" class="screen">
+        <div class="screen-header">
+            <button class="back-btn" onclick="backToMain()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <span class="screen-title">Инструкция</span>
+            <div style="width:40px;"></div>
+        </div>
+        <div class="instruction-content">
+            <div class="instruction-step">
+                <div class="step-number">1</div>
+                <div class="step-text">
+                    <b>Позвони в ГАИ</b>
+                    <p>Набери <b>102</b> или <b>112</b> и узнай, куда эвакуировали машину</p>
+                </div>
+            </div>
+            <div class="instruction-step">
+                <div class="step-number">2</div>
+                <div class="step-text">
+                    <b>Возьми документы</b>
+                    <p>Паспорт, свидетельство о регистрации, водительские права</p>
+                </div>
+            </div>
+            <div class="instruction-step">
+                <div class="step-number">3</div>
+                <div class="step-text">
+                    <b>Поезжай на штрафстоянку</b>
+                    <p>Оплати эвакуацию и стоимость хранения автомобиля</p>
+                </div>
+            </div>
+            <div class="instruction-step">
+                <div class="step-number">4</div>
+                <div class="step-text">
+                    <b>Важно!</b>
+                    <p>Оплата услуг не является основанием для невозврата авто</p>
+                </div>
+            </div>
+            <button class="call-btn" onclick="emergencyCall()">
+                📞 Позвонить в ГАИ 102
+            </button>
+        </div>
     </div>
 
     <script src="script.js"></script>
