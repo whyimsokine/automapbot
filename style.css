@@ -1,4 +1,4 @@
-/* ===== БАЗОВЫЕ СТИЛИ ===== */
+/* ===== БАЗА ===== */
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +12,6 @@ body {
     height: 100vh;
     overflow: hidden;
     user-select: none;
-    -webkit-user-select: none;
 }
 
 /* ===== ЭКРАНЫ ===== */
@@ -20,21 +19,16 @@ body {
     display: none;
     height: 100vh;
     flex-direction: column;
-    animation: fadeIn 0.3s ease;
+    animation: fade .3s ease;
 }
 
 .screen.active {
     display: flex;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+@keyframes fade {
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
 }
 
 /* ===== ХЕДЕР ===== */
@@ -42,121 +36,197 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 20px;
-    background: var(--tg-theme-secondary-bg-color, #ffffff);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 16px 20px 8px;
     flex-shrink: 0;
+    background: var(--tg-theme-bg-color, #f5f7fa);
 }
 
 .header-title {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
-.header-title .car-icon {
+.logo {
     font-size: 28px;
 }
 
-.header-title h1 {
-    font-size: 20px;
+.app-name {
+    font-size: 18px;
     font-weight: 700;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .close-btn {
-    background: rgba(0,0,0,0.05);
+    background: none;
     border: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    font-size: 20px;
+    padding: 6px;
     cursor: pointer;
     color: var(--tg-theme-text-color, #1a1a2e);
+    opacity: 0.5;
+    border-radius: 50%;
     transition: all 0.2s;
 }
 
-.close-btn:active {
-    transform: scale(0.9);
+.close-btn:hover {
+    opacity: 1;
+    background: rgba(0,0,0,0.05);
+}
+
+.close-btn svg {
+    display: block;
 }
 
 /* ===== ПРИВЕТСТВИЕ ===== */
 .greeting {
-    padding: 16px 20px 8px;
+    padding: 0 20px 12px;
     flex-shrink: 0;
 }
 
 .greeting-text {
-    font-size: 22px;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.greeting-sub {
+    font-size: 16px;
+    color: var(--tg-theme-hint-color, #888);
+    margin-top: 2px;
+}
+
+/* ===== ФОРМА ШТРАФОВ ===== */
+.fines-form {
+    padding: 0 20px 12px;
+    flex-shrink: 0;
+}
+
+.form-card {
+    background: var(--tg-theme-secondary-bg-color, #ffffff);
+    border-radius: 16px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.car-input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1.5px solid var(--tg-theme-button-color, #007aff);
+    border-radius: 12px;
+    font-size: 15px;
     font-weight: 600;
+    text-transform: uppercase;
+    background: var(--tg-theme-bg-color, #f5f7fa);
+    color: var(--tg-theme-text-color, #1a1a2e);
+    outline: none;
+    transition: border 0.2s;
+}
+
+.car-input:focus {
+    border-color: #007aff;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+}
+
+.car-input::placeholder {
+    text-transform: none;
+    font-weight: 400;
+    color: #aaa;
+}
+
+.check-btn {
+    padding: 12px 18px;
+    background: var(--tg-theme-button-color, #007aff);
+    color: var(--tg-theme-button-text-color, #fff);
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.check-btn:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+.form-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--tg-theme-hint-color, #888);
+}
+
+.result-box {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f0f7ff;
+    border-radius: 12px;
+}
+
+.e-pasluga-btn {
+    display: block;
+    padding: 10px;
+    background: #1a73e8;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.e-pasluga-btn:active {
+    transform: scale(0.97);
 }
 
 /* ===== СЕТКА МЕНЮ ===== */
 .menu-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    padding: 16px 20px;
-    overflow-y: auto;
+    gap: 12px;
+    padding: 0 20px 80px;
     flex: 1;
-    padding-bottom: 80px;
+    overflow-y: auto;
+    align-content: start;
 }
 
 .menu-card {
-    border-radius: 20px;
-    padding: 20px 16px;
-    color: white;
+    background: var(--tg-theme-secondary-bg-color, #ffffff);
+    border-radius: 16px;
+    padding: 16px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    overflow: hidden;
-    min-height: 110px;
+    transition: all 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    align-items: flex-start;
+    gap: 4px;
 }
 
 .menu-card:active {
-    transform: scale(0.95) translateY(2px);
-}
-
-.menu-card::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.1);
-    border-radius: 50%;
-    transform: rotate(25deg);
+    transform: scale(0.97);
 }
 
 .card-icon {
-    font-size: 36px;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 1;
+    font-size: 28px;
+    margin-bottom: 6px;
 }
 
 .card-title {
     font-size: 15px;
-    font-weight: 700;
-    position: relative;
-    z-index: 1;
+    font-weight: 600;
 }
 
 .card-desc {
-    font-size: 11px;
-    opacity: 0.85;
-    margin-top: 4px;
-    position: relative;
-    z-index: 1;
+    font-size: 12px;
+    color: var(--tg-theme-hint-color, #888);
 }
 
 /* ===== БАННЕР ===== */
@@ -165,14 +235,12 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 12px 20px;
-    background: var(--tg-theme-secondary-bg-color, #ffffff);
+    padding: 10px 20px;
     text-align: center;
     font-size: 12px;
-    color: #999;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    color: #bbb;
+    background: var(--tg-theme-bg-color, #f5f7fa);
+    border-top: 1px solid rgba(0,0,0,0.04);
 }
 
 /* ===== ШАПКА ЭКРАНОВ ===== */
@@ -181,27 +249,23 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-    background: var(--tg-theme-secondary-bg-color, #ffffff);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background: var(--tg-theme-bg-color, #f5f7fa);
     flex-shrink: 0;
 }
 
 .back-btn {
     background: none;
     border: none;
-    padding: 8px;
-    cursor: pointer;
+    font-size: 16px;
     color: var(--tg-theme-text-color, #1a1a2e);
-    border-radius: 12px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 10px;
     transition: background 0.2s;
 }
 
 .back-btn:active {
     background: rgba(0,0,0,0.05);
-}
-
-.back-btn svg {
-    display: block;
 }
 
 .screen-title {
@@ -224,213 +288,74 @@ body {
     padding-bottom: 30px;
 }
 
-.instruction-step {
+.step {
     display: flex;
-    gap: 16px;
-    padding: 16px;
-    background: var(--tg-theme-secondary-bg-color, #ffffff);
-    border-radius: 16px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    transition: all 0.2s;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
 }
 
-.instruction-step:active {
-    transform: scale(0.98);
+.step:last-child {
+    border-bottom: none;
 }
 
 .step-number {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
     font-size: 14px;
-    flex-shrink: 0;
-}
-
-.step-text {
-    flex: 1;
+    font-weight: 700;
+    color: var(--tg-theme-hint-color, #888);
+    min-width: 32px;
 }
 
 .step-text b {
-    display: block;
     font-size: 15px;
-    margin-bottom: 4px;
+    display: block;
 }
 
 .step-text p {
     font-size: 13px;
     color: var(--tg-theme-hint-color, #888);
-    line-height: 1.4;
+    margin-top: 2px;
 }
 
 .call-btn {
     width: 100%;
-    padding: 16px;
-    background: linear-gradient(135deg, #fa709a, #fee140);
+    padding: 14px;
+    background: var(--tg-theme-button-color, #007aff);
+    color: var(--tg-theme-button-text-color, #fff);
     border: none;
-    border-radius: 16px;
-    font-size: 17px;
-    font-weight: 700;
-    color: #1a1a2e;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 16px;
     transition: all 0.2s;
-    box-shadow: 0 4px 15px rgba(250, 112, 154, 0.3);
+    margin-top: 20px;
 }
 
 .call-btn:active {
     transform: scale(0.97);
+    opacity: 0.8;
 }
 
-/* ===== ФОРМА ПРОВЕРКИ ШТРАФОВ ===== */
-.fines-form {
-    padding: 16px 20px 8px;
-    flex-shrink: 0;
-}
-
-.form-card {
-    background: var(--tg-theme-secondary-bg-color, #ffffff);
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-}
-
-.form-title {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.form-subtitle {
-    font-size: 14px;
-    color: var(--tg-theme-hint-color, #888);
-    margin-bottom: 14px;
-}
-
-.input-group {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.car-input {
-    flex: 1;
-    padding: 12px 16px;
-    border: 2px solid var(--tg-theme-button-color, #007aff);
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    background: var(--tg-theme-bg-color, #f5f7fa);
-    color: var(--tg-theme-text-color, #1a1a2e);
-    outline: none;
-    transition: all 0.2s;
-}
-
-.car-input:focus {
-    border-color: #764ba2;
-    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
-}
-
-.car-input::placeholder {
-    text-transform: none;
-    font-weight: 400;
-    color: #aaa;
-}
-
-.check-btn {
-    padding: 12px 20px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-}
-
-.check-btn:active {
-    transform: scale(0.95);
-}
-
-.form-hint {
-    margin-top: 12px;
-    font-size: 12px;
-    color: var(--tg-theme-hint-color, #888);
-}
-
-.result-box {
-    margin-top: 14px;
-    padding: 14px;
-    background: #f0f7ff;
-    border-radius: 12px;
-    border-left: 4px solid #667eea;
-}
-
-.result-box p {
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.e-pasluga-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #1a73e8, #0d47a1);
-    color: white;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 15px;
-    transition: all 0.2s;
-    width: 100%;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.e-pasluga-btn:active {
-    transform: scale(0.97);
-}
-
-/* ===== АДАПТАЦИЯ ПОД ТЕМУ TELEGRAM ===== */
+/* ===== ТЕМНАЯ ТЕМА ===== */
 @media (prefers-color-scheme: dark) {
     body {
-        background: var(--tg-theme-bg-color, #1a1a2e);
+        background: var(--tg-theme-bg-color, #1c1c1e);
     }
-    .header, .screen-header {
-        background: var(--tg-theme-secondary-bg-color, #16213e);
-        border-bottom-color: rgba(255,255,255,0.05);
+    .header {
+        background: var(--tg-theme-bg-color, #1c1c1e);
     }
-    .footer-banner {
-        background: var(--tg-theme-secondary-bg-color, #16213e);
-        border-top-color: rgba(255,255,255,0.05);
-    }
-    .instruction-step {
-        background: var(--tg-theme-secondary-bg-color, #16213e);
-    }
-}
-
-/* ===== АДАПТИВ ===== */
-@media (max-width: 380px) {
-    .menu-grid {
-        gap: 10px;
-        padding: 12px 16px;
+    .form-card {
+        background: var(--tg-theme-secondary-bg-color, #2c2c2e);
     }
     .menu-card {
-        padding: 16px 12px;
-        min-height: 90px;
+        background: var(--tg-theme-secondary-bg-color, #2c2c2e);
     }
-    .card-icon {
-        font-size: 28px;
+    .footer-banner {
+        background: var(--tg-theme-bg-color, #1c1c1e);
+        border-top-color: rgba(255,255,255,0.05);
     }
-    .card-title {
-        font-size: 13px;
+    .screen-header {
+        background: var(--tg-theme-bg-color, #1c1c1e);
     }
 }
