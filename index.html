@@ -70,23 +70,24 @@
         </div>
     </div>
 
-    <!-- Нижнее меню (как в Blum) -->
-<div class="bottom-nav">
-    <div class="nav-item active" onclick="showScreen('main-screen')">
-        <span class="nav-icon">🏠</span>
-        <span class="nav-label">Главная</span>
-    </div>
-    <div class="nav-item" onclick="openMap()">
-        <span class="nav-icon">📍</span>
-        <span class="nav-label">Карта</span>
-    </div>
-    <div class="nav-item" onclick="document.getElementById('carNumber').focus()">
-        <span class="nav-icon">💰</span>
-        <span class="nav-label">Штрафы</span>
-    </div>
-    <div class="nav-item" onclick="showSettings()">
-        <span class="nav-icon">⚙️</span>
-        <span class="nav-label">Настройки</span>
+    <!-- Нижнее меню -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showScreen('main-screen')">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Главная</span>
+        </div>
+        <div class="nav-item" onclick="openMap()">
+            <span class="nav-icon">📍</span>
+            <span class="nav-label">Карта</span>
+        </div>
+        <div class="nav-item" onclick="document.getElementById('carNumber').focus()">
+            <span class="nav-icon">💰</span>
+            <span class="nav-label">Штрафы</span>
+        </div>
+        <div class="nav-item" onclick="showSettings()">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Настройки</span>
+        </div>
     </div>
 </div>
 
@@ -97,7 +98,7 @@
         <span class="screen-title">Штрафстоянки</span>
         <div style="width:50px;"></div>
     </div>
-    <div id="map-container"></div>
+    <div id="map-container" style="flex:1;width:100%;min-height:300px;background:#1a1a1a;"></div>
 </div>
 
 <!-- ===== ЭКРАН ИНСТРУКЦИИ ===== -->
