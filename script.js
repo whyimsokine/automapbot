@@ -13,12 +13,11 @@ const parks = [
 let map = null;
 let userLocation = null;
 
-// ===== НАВИГАЦИЯ С АНИМАЦИЕЙ =====
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const screen = document.getElementById(screenId);
     screen.classList.add('active');
-    screen.style.animation = 'fadeIn 0.3s ease';
+    screen.style.animation = 'fade .3s ease';
 }
 
 function backToMain() {
@@ -36,7 +35,6 @@ function openMap() {
 }
 
 function initMap() {
-    // Получаем геолокацию
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (pos) => {
@@ -60,10 +58,10 @@ function initMap() {
         parks.forEach(park => {
             const placemark = new ymaps.Placemark(park.coords, {
                 balloonContent: `
-                    <div style="padding:12px;font-family:system-ui;">
-                        <b style="font-size:16px;">${park.name}</b><br>
+                    <div style="padding:12px;font-family:system-ui;background:#1a1a1a;color:#fff;border-radius:12px;">
+                        <b style="font-size:16px;color:#fff;">${park.name}</b><br>
                         📍 ${park.address}<br>
-                        📞 <a href="tel:${park.phone}" style="color:#007aff;text-decoration:none;">${park.phone}</a>
+                        📞 <a href="tel:${park.phone}" style="color:#4a4a4a;text-decoration:none;">${park.phone}</a>
                     </div>
                 `,
                 hintContent: park.name
@@ -87,19 +85,15 @@ function initMap() {
     });
 }
 
-// ===== ИНСТРУКЦИЯ =====
 function showInstruction() {
     showScreen('instruction-screen');
 }
 
-// ===== ЭКСТРЕННЫЙ ВЫЗОВ =====
 function emergencyCall() {
     tg.sendData(JSON.stringify({ action: 'emergency_call' }));
-    // Прямой звонок
     window.location.href = 'tel:102';
 }
 
-// ===== НАПОМИНАНИЕ О ПАРКОВКЕ =====
 function startParkingReminder() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -118,7 +112,7 @@ function startParkingReminder() {
             () => {
                 tg.showPopup({
                     title: '❌ Ошибка',
-                    message: 'Включи GPS для определения места парковки',
+                    message: 'Включи GPS',
                     buttons: [{ type: 'ok' }]
                 });
             },
@@ -133,8 +127,6 @@ function startParkingReminder() {
     }
 }
 
-// ===== ЗАГЛУШКИ =====
-// ===== ПРОВЕРКА ШТРАФОВ через e-Pasluga =====
 function checkFines() {
     const input = document.getElementById('carNumber');
     const resultDiv = document.getElementById('fines-result');
@@ -142,7 +134,6 @@ function checkFines() {
     
     let carNumber = input.value.trim().toUpperCase();
     
-    // Проверяем, что номер введен
     if (!carNumber) {
         tg.showPopup({
             title: '❌ Введите номер',
@@ -153,10 +144,8 @@ function checkFines() {
         return;
     }
     
-    // Форматируем номер (убираем лишние пробелы, оставляем только буквы и цифры)
     carNumber = carNumber.replace(/\s/g, '');
     
-    // Проверяем формат (простая проверка)
     if (carNumber.length < 5) {
         tg.showPopup({
             title: '❌ Неверный формат',
@@ -166,23 +155,13 @@ function checkFines() {
         return;
     }
     
-    // Показываем результат
     resultDiv.style.display = 'block';
-    
-    // Формируем ссылку на e-Pasluga
-    // Прямая ссылка на услугу проверки штрафов (для примера)
-    const baseUrl = 'https://e-pasluga.by/';
-    // В реальности ссылка может быть другой, но мы используем поиск
-    const searchUrl = `https://www.google.com/search?q=проверка+штрафов+ГАИ+Беларусь+${encodeURIComponent(carNumber)}`;
-    
-    // Рекомендуемый вариант: отправляем пользователя на официальный сайт
-    // с пояснением, что нужно делать
-    link.href = `https://e-pasluga.by/`;
-    link.textContent = `🔐 Перейти на e-pasluga.by`;
+    link.href = 'https://e-pasluga.by/';
+    link.textContent = 'Перейти на e-pasluga.by →';
     
     tg.showPopup({
         title: '✅ Номер принят',
-        message: `Вы будете перенаправлены на e-pasluga.by для проверки штрафов по номеру ${carNumber}`,
+        message: `Проверка штрафов для ${carNumber}`,
         buttons: [{ type: 'ok' }]
     });
 }

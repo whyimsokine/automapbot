@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>АвтоПомощник</title>
+    <title>AutoHelper</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=Be9f69245-986e-4ee5-96c1-e34baf8b9b78&lang=ru_RU"></script>
     <link rel="stylesheet" href="style.css">
@@ -14,31 +14,31 @@
 <div id="main-screen" class="screen active">
     <!-- Шапка -->
     <div class="header">
-        <div class="header-title">
+        <div class="header-left">
             <span class="logo">🚗</span>
             <span class="app-name">AutoHelper</span>
         </div>
         <button class="close-btn" onclick="closeApp()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
     </div>
 
     <!-- Приветствие -->
     <div class="greeting">
         <p class="greeting-text">Привет! 👋</p>
-        <p class="greeting-sub">Чем могу помочь?</p>
     </div>
 
     <!-- Форма проверки штрафов -->
     <div class="fines-form">
+        <div class="form-title">🔹 Проверка штрафов</div>
         <div class="form-card">
             <div class="form-row">
-                <input type="text" id="carNumber" placeholder="Номер авто" class="car-input" maxlength="9">
+                <input type="text" id="carNumber" placeholder="Номер авто" class="car-input">
                 <button onclick="checkFines()" class="check-btn">Проверить</button>
             </div>
-            <div class="form-hint">🔐 Проверка на e-pasluga.by</div>
+            <div class="form-hint">⏳ Проверка на e-pasluga.by</div>
             <div id="fines-result" style="display:none;" class="result-box">
-                <a id="finesLink" href="#" target="_blank" class="e-pasluga-btn">Перейти на e-pasluga.by →</a>
+                <a id="finesLink" href="#" target="_blank" class="e-pasluga-btn">Перейти →</a>
             </div>
         </div>
     </div>
@@ -70,8 +70,24 @@
         </div>
     </div>
 
-    <div class="footer-banner">
-        <span>Реклама</span>
+    <!-- Нижнее меню (как в Blum) -->
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Главная</span>
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">📍</span>
+            <span class="nav-label">Карта</span>
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">💰</span>
+            <span class="nav-label">Штрафы</span>
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Настройки</span>
+        </div>
     </div>
 </div>
 
